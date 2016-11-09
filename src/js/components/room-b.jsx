@@ -10,8 +10,10 @@ const mapStateToProps = state => ({
   squares: state.squares
 });
 
-const component = ({ squares }) =>
-  <Room skyTexture="assets/2.jpg">
+const component = ({ squares, params }) => {
+  console.log('params,', params);
+  return <Room skyTexture="assets/2.jpg">
     <NavAnchor navigate-on-click="/room-a" position="5 0 0"/>
   </Room>
-export default connect(mapStateToProps)(component);
+}
+export const RoomB = connect(mapStateToProps)(component);

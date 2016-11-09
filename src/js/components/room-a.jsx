@@ -18,4 +18,4 @@ const component = ({ squares }) =>
       )}
     </Entity>
 
-export default connect(mapStateToProps)(component);
+export const RoomA = connect(mapStateToProps)(component);

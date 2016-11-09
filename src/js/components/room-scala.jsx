@@ -14,7 +14,7 @@ const component = ({ squares }) =>
   <Room skyTexture="assets/scala.jpg">
     <NavAnchor navigate-on-click="/room-b" position="0 0 5" />
   </Room>
-export default connect(mapStateToProps)(component);
+export const RoomScala = connect(mapStateToProps)(component);
 
 // const component = ({ squares }) =>
 //   <Entity>

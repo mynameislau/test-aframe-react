@@ -5,34 +5,41 @@ import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 import { Entity, Scene } from 'aframe-react';
 
-import { squaresReducers } from './reducers/squares';
+import { squaresReducer } from './reducers/squares';
+import { roomsReducer } from './reducers/rooms';
 
-import RoomA from './components/room-a.jsx';
-import RoomB from './components/room-b.jsx';
-import RoomScala from './components/room-scala.jsx';
+import { RoomA } from './components/room-a.jsx';
+import { RoomB } from './components/room-b.jsx';
+import { Room } from './components/room.jsx';
+import { RoomScala } from './components/room-scala.jsx';
+import { initEditablePos } from './aframe/components/editable-pos';
 
-import AFRAME from 'aframe';
-import registerDisplayLife from './aframe/components/display-life';
-import registerRotateOnTick from './aframe/components/rotate-on-tick';
+import './aframe/components/toggle-debug';
 
 console.log('nope');
 
 const store = createStore(combineReducers({
-  squares: squaresReducers
-}))
+  squares: squaresReducer,
+  rooms: roomsReducer
+}));
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
-      <Router history={browserHistory}>
-        <Route path="/" component={RoomScala}/>
-        <Route path="/room-b" component={RoomB}/>
-        <Route path="/room-a" component={RoomA}/>
-      </Router>
+initEditablePos(store);
+
+window.addEventListener('load', () => {
+  ReactDOM.render(
+    <Scene toggle-debug inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+      <Provider store={store}>
+        <Router history={browserHistory}>
+          <Route path="/" component={RoomScala}/>
+          <Route path="/room/:roomName" component={Room}/>
+          <Route path="/room-b" component={RoomB}/>
+          <Route path="/room-a" component={RoomA}/>
+        </Router>
+      </Provider>
     </Scene>
-    </Provider>
 
-, document.getElementById('app'));
+    , document.getElementById('app'));
+});
 
     // document.body.innerHTML = `
     // <a-scene
