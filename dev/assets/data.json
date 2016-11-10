@@ -1,0 +1,83 @@
+{
+  "rue": {
+    "sky": "assets/rooms/rue.jpg",
+    "navAnchors": {
+      "1": {
+        "href": "/room/cour",
+        "position": [5, 0, 0]
+      }
+    }
+  },
+  "cuisine": {
+    "sky": "assets/rooms/cuisine.jpg",
+    "navAnchors": {
+      "1": {
+        "href": "/room/escaliers2",
+        "position": [5, 0, 0]
+      }
+    }
+  },
+  "cour": {
+    "sky": "assets/rooms/cour.jpg",
+    "navAnchors": {
+      "1": {
+        "href": "/room/rue",
+        "position": [5, 0, 0]
+      }
+    }
+  },
+  "escaliers2": {
+    "sky": "assets/rooms/escaliers2.jpg",
+    "navAnchors": {
+      "1": {
+        "href": "/room/cour",
+        "position": [5, 0, 0]
+      }
+    }
+  },
+  "maud-cha-so": {
+    "sky": "assets/rooms/maud-cha-so.jpg",
+    "navAnchors": {
+      "1": {
+        "href": "/room/escaliers",
+        "position": [5, 0, 0]
+      }
+    }
+  },
+  "fish": {
+    "sky": "assets/rooms/blip.jpg",
+    "navAnchors": {
+      "1": {
+        "href": "/room/scala",
+        "position": [5, 0, 0]
+      }
+    }
+  },
+  "tom-alex": {
+    "sky": "assets/rooms/tom-alex.jpg",
+    "navAnchors": {
+      "1": {
+        "href": "/room/maud-cha-so",
+        "position": [5, 0, 0]
+      }
+    }
+  },
+  "escaliers": {
+    "sky": "assets/rooms/escaliers.jpg",
+    "navAnchors": {
+      "1": {
+        "href": "/room/cuisine",
+        "position": [5, 0, 0]
+      }
+    }
+  },
+  "devs": {
+    "sky": "assets/rooms/devs.jpg",
+    "navAnchors": {
+      "2": {
+        "href": "/room/tom-alex",
+        "position": [-12.500000000000101, -4.590000000000001, 22.590000000000074]
+      }
+    }
+  }
+}

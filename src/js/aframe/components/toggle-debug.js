@@ -9,6 +9,12 @@ AFRAME.registerComponent('toggle-debug', {
         window.debugNavAnchors = !window.debugNavAnchors;
         console.log('debug toggled :', window.debugNavAnchors);
       }
+      if (event.key === 'y') {
+        browserHistory.push('/export');
+      }
     });
+  },
+  remove: () => {
+    console.log('removing');
   }
 });

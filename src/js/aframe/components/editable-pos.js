@@ -21,10 +21,10 @@ export const initEditablePos = store => AFRAME.registerComponent('editable-pos',
             const substract = val => val - 0.1;
 
             const mapping = {
-              'o': { coord: 'z', 'func': add },
-              'l': { coord: 'z', 'func': substract },
-              'k': { coord: 'x', 'func': add },
-              'm': { coord: 'x', 'func': substract },
+              'o': { coord: 'x', 'func': substract },
+              'l': { coord: 'x', 'func': add },
+              'k': { coord: 'z', 'func': substract },
+              'm': { coord: 'z', 'func': add },
               'i': { coord: 'y', 'func': add },
               'p': { coord: 'y', 'func': substract }
             };

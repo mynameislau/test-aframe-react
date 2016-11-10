@@ -11,6 +11,11 @@ module.exports = {
     path:  path.join(__dirname, 'dev'),
     publicPath: '/assets/js/',
   },
+  resolve: {
+    modules: ['src/js', 'node_modules'],
+    extensions: ['.js', '.jsx'],
+    // plugins: [new DirectoryNamedWebpackPlugin()]
+  },
   devtool: 'inline-sourcemap',
   devServer: {
     contentBase: path.join(__dirname, '/dev'),
@@ -24,15 +29,21 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: [{
+          loader: 'babel-loader',
+          options: { presets: ['es2015', 'stage-0'] }
+        }],
+      },
+      {
+        test: /\.jsx$/,
         exclude: /(node_modules|bower_components)/,
         use: [{
           loader: 'babel-loader',
           options: { presets: ['react', 'es2015', 'stage-0'] }
         }],
-      },
-
-      // Loaders for other file types can go here
+      }
     ],
   },
 };

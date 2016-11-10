@@ -2,41 +2,65 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, browserHistory, IndexRedirect } from 'react-router';
 import { Entity, Scene } from 'aframe-react';
 
 import { squaresReducer } from './reducers/squares';
 import { roomsReducer } from './reducers/rooms';
 
-import { RoomA } from './components/room-a.jsx';
-import { RoomB } from './components/room-b.jsx';
-import { Room } from './components/room.jsx';
-import { RoomScala } from './components/room-scala.jsx';
+import { DefaultScene } from './components/default-scene';
+import { ExportPage } from './components/export-page';
+import { RoomCubes } from './components/room-cubes';
+import { Room } from './components/room';
+
 import { initEditablePos } from './aframe/components/editable-pos';
 
 import './aframe/components/toggle-debug';
+import './aframe/components/display-life';
+import './aframe/components/rotate-on-tick';
 
-console.log('nope');
+// console.log('nope');
 
 const store = createStore(combineReducers({
   squares: squaresReducer,
   rooms: roomsReducer
 }));
 
+window.fetch('assets/data.json')
+.then(response => {
+  if (response.ok) {
+    return response.text();
+  }
+
+  return Promise.reject();
+})
+.then(text => {
+  console.log(text);
+  const roomsData = JSON.parse(text);
+
+  store.dispatch({
+    type: 'GET_ROOMS_FROM_FILE',
+    data: roomsData
+  });
+})
+.catch(reason => console.log(reason));
+
 initEditablePos(store);
 
 window.addEventListener('load', () => {
   ReactDOM.render(
-    <Scene toggle-debug inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
       <Provider store={store}>
         <Router history={browserHistory}>
-          <Route path="/" component={RoomScala}/>
-          <Route path="/room/:roomName" component={Room}/>
-          <Route path="/room-b" component={RoomB}/>
-          <Route path="/room-a" component={RoomA}/>
+          <Route path="/">
+            <IndexRedirect to="/room/devs"/>
+          </Route>
+          <Route path="/room" component={DefaultScene}>
+            <Route path="/room/cubes" component={RoomCubes}/>
+            <Route path="/room/:roomName" component={Room}/>
+          </Route>
+          <Route path="/export" component={ExportPage}/>
         </Router>
       </Provider>
-    </Scene>
 
     , document.getElementById('app'));
 });
