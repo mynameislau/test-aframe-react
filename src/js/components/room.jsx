@@ -14,15 +14,11 @@ const component = ({ children, skyTexture = 'assets/2.jpg', params, rooms }) => 
   const sky = room ? room.sky : skyTexture;
   const navAnchors = room ? room.navAnchors : [];
 
-  console.log('sky', sky);
-
-  return <Entity>
+  return <Entity toggle-debug={params.roomName}>
     <VisorCam/>
     <Entity primitive="a-sky" material={`src: url(${sky})`}/>
     {
       Object.keys(navAnchors).map(id => {
-        console.log('log pos', navAnchors[id].position);
-
         return <NavAnchor
           key={id}
           editable-pos={`name: ${params.roomName}; id: ${id};`}

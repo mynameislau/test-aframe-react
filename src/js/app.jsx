@@ -4,6 +4,7 @@ import { createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory, IndexRedirect } from 'react-router';
 import { Entity, Scene } from 'aframe-react';
+import { getRoomsFromFileAction } from './actions/rooms';
 
 import { squaresReducer } from './reducers/squares';
 import { roomsReducer } from './reducers/rooms';
@@ -14,8 +15,7 @@ import { RoomCubes } from './components/room-cubes';
 import { Room } from './components/room';
 
 import { initEditablePos } from './aframe/components/editable-pos';
-
-import './aframe/components/toggle-debug';
+import { initToggleDebug } from './aframe/components/toggle-debug';
 import './aframe/components/display-life';
 import './aframe/components/rotate-on-tick';
 
@@ -35,17 +35,14 @@ window.fetch('assets/data.json')
   return Promise.reject();
 })
 .then(text => {
-  console.log(text);
   const roomsData = JSON.parse(text);
 
-  store.dispatch({
-    type: 'GET_ROOMS_FROM_FILE',
-    data: roomsData
-  });
+  store.dispatch(getRoomsFromFileAction(roomsData));
 })
 .catch(reason => console.log(reason));
 
 initEditablePos(store);
+initToggleDebug(store);
 
 window.addEventListener('load', () => {
   ReactDOM.render(

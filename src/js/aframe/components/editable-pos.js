@@ -1,19 +1,20 @@
 import AFRAME from 'aframe';
 import { browserHistory } from 'react-router';
+import { editPosAction } from '../../actions/rooms';
 
 export const initEditablePos = store => AFRAME.registerComponent('editable-pos', {
   schema: {
     id: { default: null },
     name: { default: null }
   },
-  init: function () {
+  init () {
     window.navAnchors = window.navAnchors || [];
     window.navAnchors.push(this.el);
 
     this.el.addEventListener('click', () => {
       if (window.debugNavAnchors) {
         document.addEventListener('keydown', event => {
-          const editPos = () => {
+          const editPosition = () => {
             const key = event.key;
             const prevPos = this.el.getAttribute('position');
 
@@ -29,7 +30,9 @@ export const initEditablePos = store => AFRAME.registerComponent('editable-pos',
               'p': { coord: 'y', 'func': substract }
             };
 
-            if (!mapping[key]) { return; }
+            if (!mapping[key]) {
+              return;
+            }
 
             const toMerge = {};
             const coord = mapping[key].coord;
@@ -43,10 +46,11 @@ export const initEditablePos = store => AFRAME.registerComponent('editable-pos',
             // console.log(newPos);
             // this.el.setAttribute('position', newPos);
 
-            store.dispatch({ type: 'EDIT_POS', name: this.data.name, id: this.data.id, position: Object.values(newPos) });
+            store.dispatch(editPosAction(this.data.name, this.data.id, Object.values(newPos)));
           };
 
-          const intervalID = window.setInterval(editPos, 20);
+          const intervalID = window.setInterval(editPosition, 20);
+
           document.addEventListener('keyup', () => window.clearInterval(intervalID));
         });
       }

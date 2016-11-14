@@ -10,7 +10,7 @@
   },
   "rules": {
     "object-curly-spacing": [2, "always"],
-    "object-shorthand": [2, "never"],
+    "object-shorthand": [2, "always"],
     "padded-blocks": [2, {"switches": "always", "classes": "never", "blocks": "never"} ],
     "one-var": 0,
     "quote-props": 0,
@@ -34,15 +34,16 @@
     "no-warning-comments": 1,
     "no-inline-comments": 0,
     "no-extra-parens": [2, "all", { "conditionalAssign": false }],
-
+    "id-length": [2, { "exceptions": ["x", "y", "a", "b", "i"]}],
     "no-var": 2,
     "prefer-template": 2,
     "multiline-ternary": 0,
-    "no-confusing-arrow": [2, {"allowParens": true } ],
+    "no-confusing-arrow": [0, {"allowParens": true } ],
 
-    "func-names": 2,
+    "func-names": 0,
     "prefer-arrow-callback": 2,
     "sort-keys": 0,
+    "new-cap": 1,
 
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
