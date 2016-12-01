@@ -12,12 +12,14 @@ import { roomsReducer } from './reducers/rooms';
 import { DefaultScene } from './components/default-scene';
 import { ExportPage } from './components/export-page';
 import { RoomCubes } from './components/room-cubes';
+import { RoomEarth } from './components/room-earth';
 import { Room } from './components/room';
 
 import { initEditablePos } from './aframe/components/editable-pos';
 import { initToggleDebug } from './aframe/components/toggle-debug';
 import './aframe/components/display-life';
 import './aframe/components/rotate-on-tick';
+import 'aframe-animation-component';
 
 // console.log('nope');
 
@@ -53,6 +55,7 @@ window.addEventListener('load', () => {
           </Route>
           <Route path="/room" component={DefaultScene}>
             <Route path="/room/cubes" component={RoomCubes}/>
+            <Route path="/room/earth" component={RoomEarth}/>
             <Route path="/room/:roomName" component={Room}/>
           </Route>
           <Route path="/export" component={ExportPage}/>
